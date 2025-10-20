@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта региональных новостей России</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .sidebar {
+            width: 320px;
+            background: rgba(25, 35, 60, 0.9);
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        .controls {
+            margin-bottom: 25px;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group h3 {
+            margin-bottom: 12px;
+            color: #4facfe;
+            font-size: 1.1rem;
+        }
+        
+        .category-filters {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 8px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(45, 55, 72, 0.7);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .category-item:hover {
+            background: rgba(79, 175, 254, 0.3);
+            border-color: rgba(79, 175, 254, 0.5);
+        }
+        
+        .category-item.active {
+            background: rgba(79, 175, 254, 0.4);
+            border-color: #4facfe;
+            box-shadow: 0 0 8px rgba(79, 175, 254, 0.4);
+        }
+        
+        .category-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 12px;
+            background: #4facfe;
+        }
+        
+        .category-label {
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        .update-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #0f172a;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 175, 254, 0.4);
+        }
+        
+        .last-update {
+            background: rgba(45, 55, 72, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .instructions-toggle {
+            background: rgba(45, 55, 72, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .instructions-toggle:hover {
+            background: rgba(79, 175, 254, 0.3);
+        }
+        
+        .instructions-content {
+            margin-top: 15px;
+            background: rgba(45, 55, 72, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .instructions-content h3 {
+            margin-bottom: 10px;
+            color: #4facfe;
+        }
+        
+        .instructions-content ul {
+            padding-left: 20px;
+        }
+        
+        .instructions-content li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .info-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(25, 35, 60, 0.9);
+            padding: 12px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+        
+        .popup {
+            background: rgba(25, 35, 60, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .popup-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #4facfe;
+        }
+        
+        .popup-description {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .popup-date {
+            font-size: 0.85rem;
+            color: #a0aec0;
+            margin-bottom: 10px;
+        }
+        
+        .popup-link {
+            display: inline-block;
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .popup-link:hover {
+            text-decoration: underline;
+        }
+        
+        .cluster-list {
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .cluster-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cluster-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cluster-item-title {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: #4facfe;
+            cursor: pointer;
+        }
+        
+        .cluster-item-title:hover {
+            text-decoration: underline;
+        }
+        
+        .cluster-item-district {
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(25, 35, 60, 0.9);
+            padding: 20px 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 20;
+        }
+        
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #4facfe;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                max-height: 40vh;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .info-panel {
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Региональные Новости РФ</h1>
+                <p>Интерактивная карта по федеральным округам</p>
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <h3>Федеральные округа</h3>
+                    <div class="category-filters">
+                      <div style="margin-bottom: 12px;">
+                        <select id="selectAllDistricts" class="btn" style="width:100%; padding:10px; background:#4facfe; color:#0f172a;">
+                          <option value="all">✅ Включить все</option>
+                          <option value="none">❌ Выключить все</option>
+                        </select>
+                      </div>
+                      <!-- Фильтры будут сгенерированы динамически -->
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>Управление</h3>
+                    <div class="update-controls">
+                        <button id="updateBtn" class="btn btn-primary">
+                            <span>Обновить сейчас</span>
+                        </button>
+                        <div class="last-update">
+                            Последнее обновление: <span id="lastUpdateTime">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructions-toggle" id="instructionsToggle">
+                📋 Как использовать карту
+            </div>
+            <div class="instructions-content" id="instructionsContent">
+                <h3>Инструкция по использованию</h3>
+                <ul>
+                    <li>Кликните по метке для просмотра новости</li>
+                    <li>Фильтруйте по федеральному округу</li>
+                    <li>Карта обновляется каждые 5 минут</li>
+                    <li>Новости старше 7 дней не отображаются</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <div class="info-panel">
+                <div>© MapTiler © OpenStreetMap contributors</div>
+            </div>
+            
+            <div class="footer">
+                Источники: региональные СМИ России
+            </div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <span>Загрузка новостей...</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
+    <script>
+        // === КОНФИГУРАЦИЯ ===
+        const CONFIG = {
+            CENTER: [60.0, 55.0], // Урал
+            ZOOM: 3,              // Вся Россия
+            UPDATE_INTERVAL: 5 * 60 * 1000,
+            MAX_NEWS_AGE: 7 * 24 * 60 * 60 * 1000,
+            MAPTILER_KEY: 'ds5WXK3YI2r34qGCKwXu' // ← ЗАМЕНИТЕ НА СВОЙ КЛЮЧ
+        };
+
+        let map, vectorSource, clusterSource, vectorLayer, popup;
+        let selectedDistricts = new Set(['СЗФО', 'ЦФО', 'ПФО', 'УрФО', 'СФО', 'ДФО', 'ЮФО', 'СКФО']);
+        let allNewsData = [];
+
+        // === ИНИЦИАЛИЗАЦИЯ КАРТЫ ===
+        function initMap() {
+            vectorSource = new ol.source.Vector();
+            clusterSource = new ol.source.Cluster({ distance: 40, source: vectorSource });
+            vectorLayer = new ol.layer.Vector({ source: clusterSource, style: createClusterStyle });
+
+            map = new ol.Map({
+                target: 'map',
+                layers: [
+                    new ol.layer.Tile({
+                        source: new ol.source.XYZ({
+                            url: `https://api.maptiler.com/maps/bright-v2/{z}/{x}/{y}.png?key=${CONFIG.MAPTILER_KEY}`,
+                            attributions: '© MapTiler © OpenStreetMap contributors'
+                        })
+                    }),
+                    vectorLayer
+                ],
+                view: new ol.View({
+                    center: ol.proj.fromLonLat(CONFIG.CENTER),
+                    zoom: CONFIG.ZOOM
+                })
+            });
+
+            popup = new ol.Overlay({
+                element: document.createElement('div'),
+                positioning: 'bottom-center',
+                stopEvent: true
+            });
+            popup.getElement().className = 'popup';
+            map.addOverlay(popup);
+
+            const popupEl = popup.getElement();
+            popupEl.addEventListener('mouseenter', () => {
+                map.getInteractions().forEach(i => i.setActive(false));
+            });
+            popupEl.addEventListener('mouseleave', () => {
+                map.getInteractions().forEach(i => i.setActive(true));
+            });
+
+            map.on('click', handleMapClick);
+        }
+
+        // === СТИЛЬ: КРУГИ И КЛАСТЕРЫ ===
+        function createClusterStyle(feature) {
+            const size = feature.get('features').length;
+            if (size === 1) {
+                return new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 12,
+                        fill: new ol.style.Fill({ color: '#4facfe' }),
+                        stroke: new ol.style.Stroke({ color: '#fff', width: 2 })
+                    })
+                });
+            } else {
+                return new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 16,
+                        fill: new ol.style.Fill({ color: '#4facfe' }),
+                        stroke: new ol.style.Stroke({ color: '#fff', width: 2 })
+                    }),
+                    text: new ol.style.Text({
+                        text: size.toString(),
+                        fill: new ol.style.Fill({ color: '#fff' }),
+                        font: 'bold 12px sans-serif'
+                    })
+                });
+            }
+        }
+
+        // === ОБРАБОТКА КЛИКА ===
+        function handleMapClick(event) {
+            const features = map.getFeaturesAtPixel(event.pixel);
+            if (!features || features.length === 0) {
+                popup.setPosition(undefined);
+                return;
+            }
+
+            const feature = features[0];
+            const props = feature.getProperties();
+
+            if (props.features && props.features.length === 1) {
+                const news = props.features[0].get('news');
+                showSingleNewsPopup(event.coordinate, news);
+            } else if (props.features && props.features.length > 1) {
+                showClusterPopup(event.coordinate, props.features);
+            }
+        }
+
+        // === ПОПАПЫ ===
+        function showSingleNewsPopup(coordinate, news) {
+            const popupContent = `
+                <div class="popup-title">${escapeHtml(news.title)}</div>
+                <div class="popup-description">${escapeHtml(truncateText(news.description, 150))}</div>
+                <div class="popup-date">${formatDate(news.pubDate)}</div>
+                <a href="${news.link}" target="_blank" class="popup-link">Читать оригинал</a>
+            `;
+            popup.getElement().innerHTML = popupContent;
+            popup.setPosition(coordinate);
+        }
+
+        function showClusterPopup(coordinate, features) {
+            let html = '<div class="cluster-list">';
+            features.forEach(f => {
+                const n = f.get('news');
+                html += `<div class="cluster-item">
+                    <div class="cluster-item-title" onclick="window.open('${n.link}', '_blank')">${escapeHtml(truncateText(n.title, 60))}</div>
+                    <div class="cluster-item-district">${n.district}</div>
+                </div>`;
+            });
+            html += '</div>';
+            popup.getElement().innerHTML = html;
+            popup.setPosition(coordinate);
+        }
+
+        // === ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
+        function formatDate(s) {
+            const d = new Date(s);
+            const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+            return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}, ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+        }
+        function truncateText(text, max) { return text.length <= max ? text : text.substr(0, max - 3) + '...'; }
+        function escapeHtml(text) {
+            const map = {'&':'&amp;','<':'<','>':'>','"':'&quot;',"'":'&#039;'};
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // === ЗАГРУЗКА НОВОСТЕЙ ===
+        async function loadNews() {
+            document.getElementById('loading').style.display = 'flex';
+            try {
+                const res = await fetch('/api/news?_=' + Date.now());
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const newsList = await res.json();
+                allNewsData = newsList;
+
+                // Обновить карту
+                vectorSource.clear();
+                const now = Date.now();
+                for (const news of newsList) {
+                    const age = now - new Date(news.pubDate).getTime();
+                    if (age > CONFIG.MAX_NEWS_AGE || !selectedDistricts.has(news.district)) continue;
+                    const point = new ol.geom.Point(ol.proj.fromLonLat([news.lon, news.lat]));
+                    vectorSource.addFeature(new ol.Feature({ geometry: point, news }));
+                }
+
+                updateCategoryFilters(newsList);
+                document.getElementById('lastUpdateTime').textContent = 
+                    new Date().toLocaleTimeString('ru', { hour: '2-digit', minute: '2-digit' });
+
+            } catch (err) {
+                console.error('Ошибка загрузки:', err);
+                alert('Не удалось загрузить новости.');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // === ОБНОВЛЕНИЕ ФИЛЬТРОВ ===
+        function updateCategoryFilters(newsList) {
+            const visibleDistricts = new Set();
+            newsList.forEach(n => visibleDistricts.add(n.district));
+
+            const container = document.querySelector('.category-filters');
+            const selectHtml = `
+              <div style="margin-bottom: 12px;">
+                <select id="selectAllDistricts" class="btn" style="width:100%; padding:10px; background:#4facfe; color:#0f172a;">
+                  <option value="all">✅ Включить все</option>
+                  <option value="none">❌ Выключить все</option>
+                </select>
+              </div>
+            `;
+            container.innerHTML = selectHtml;
+
+            const districtLabels = {
+                'СЗФО': 'Северо-Западный',
+                'ЦФО': 'Центральный',
+                'ПФО': 'Приволжский',
+                'УрФО': 'Уральский',
+                'СФО': 'Сибирский',
+                'ДФО': 'Дальневосточный',
+                'ЮФО': 'Южный',
+                'СКФО': 'Северо-Кавказский'
+            };
+
+            visibleDistricts.forEach(district => {
+                const isActive = selectedDistricts.has(district);
+                const label = districtLabels[district] || district;
+                const count = newsList.filter(n => n.district === district).length;
+
+                const el = document.createElement('div');
+                el.className = `category-item ${isActive ? 'active' : ''}`;
+                el.dataset.district = district;
+                el.innerHTML = `
+                  <div class="category-color"></div>
+                  <span class="category-label">${label} (${count})</span>
+                `;
+                container.appendChild(el);
+            });
+
+            setupCategoryFilters();
+        }
+
+        // === НАСТРОЙКА ФИЛЬТРОВ ===
+        function setupCategoryFilters() {
+            document.getElementById('selectAllDistricts')?.addEventListener('change', function() {
+                const value = this.value;
+                document.querySelectorAll('.category-item').forEach(item => {
+                    const d = item.dataset.district;
+                    if (value === 'all') {
+                        selectedDistricts.add(d);
+                        item.classList.add('active');
+                    } else {
+                        selectedDistricts.delete(d);
+                        item.classList.remove('active');
+                    }
+                });
+                loadNews();
+                this.selectedIndex = 0;
+            });
+
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const clicked = item.dataset.district;
+                    if (item.classList.contains('active') && selectedDistricts.size === 1) {
+                        // Включить все
+                        document.querySelectorAll('.category-item').forEach(el => {
+                            el.classList.add('active');
+                            selectedDistricts.add(el.dataset.district);
+                        });
+                    } else {
+                        // Только этот
+                        document.querySelectorAll('.category-item').forEach(el => {
+                            const d = el.dataset.district;
+                            if (d === clicked) {
+                                el.classList.add('active');
+                                selectedDistricts.add(d);
+                            } else {
+                                el.classList.remove('active');
+                                selectedDistricts.delete(d);
+                            }
+                        });
+                    }
+                    loadNews();
+                });
+            });
+        }
+
+        // === ИНИЦИАЛИЗАЦИЯ ===
+        function init() {
+            initMap();
+            document.getElementById('updateBtn').addEventListener('click', loadNews);
+            document.getElementById('instructionsToggle').addEventListener('click', function() {
+                const content = document.getElementById('instructionsContent');
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                this.innerHTML = content.style.display === 'block' ? '▲ Скрыть инструкцию' : '📋 Как использовать карту';
+            });
+            loadNews();
+            setInterval(loadNews, CONFIG.UPDATE_INTERVAL);
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

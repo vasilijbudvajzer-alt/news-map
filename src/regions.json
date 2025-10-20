@@ -1,0 +1,500 @@
+[
+  {
+    "region": "Республика Адыгея",
+    "city": "Майкоп",
+    "coords": [40.1000, 44.6067],
+    "rss": "https://adynka.ru/rss/"
+  },
+  {
+    "region": "Республика Алтай",
+    "city": "Горно-Алтайск",
+    "coords": [85.9570, 51.9578],
+    "html": "https://altai-republic.ru/"
+  },
+  {
+    "region": "Республика Башкортостан",
+    "city": "Уфа",
+    "coords": [55.9587, 54.7348],
+    "rss": "https://ufa1.ru/rss"
+  },
+  {
+    "region": "Республика Бурятия",
+    "city": "Улан-Удэ",
+    "coords": [107.5833, 51.8281],
+    "rss": "https://www.buryatiya.ru/rss/"
+  },
+  {
+    "region": "Республика Дагестан",
+    "city": "Махачкала",
+    "coords": [47.5085, 42.9841],
+    "html": "https://www.riadagestan.ru/"
+  },
+  {
+    "region": "Республика Ингушетия",
+    "city": "Магас",
+    "coords": [44.8033, 43.1667],
+    "html": "https://ingushetia.ru/"
+  },
+  {
+    "region": "Кабардино-Балкарская Республика",
+    "city": "Нальчик",
+    "coords": [43.4939, 43.4811],
+    "rss": "https://kbrria.ru/rss/"
+  },
+  {
+    "region": "Республика Калмыкия",
+    "city": "Элиста",
+    "coords": [44.2833, 46.3067],
+    "html": "https://kalmregion.ru/"
+  },
+  {
+    "region": "Карачаево-Черкесская Республика",
+    "city": "Черкесск",
+    "coords": [42.0667, 44.2289],
+    "html": "https://kchr.ru/"
+  },
+  {
+    "region": "Республика Карелия",
+    "city": "Петрозаводск",
+    "coords": [34.3469, 61.7849],
+    "rss": "https://karelia.news/rss"
+  },
+  {
+    "region": "Республика Коми",
+    "city": "Сыктывкар",
+    "coords": [50.8333, 61.6667],
+    "rss": "https://komiinform.ru/rss/"
+  },
+  {
+    "region": "Республика Крым",
+    "city": "Симферополь",
+    "coords": [34.1000, 44.9500],
+    "rss": "https://crimea24.tv/rss/"
+  },
+  {
+    "region": "Республика Марий Эл",
+    "city": "Йошкар-Ола",
+    "coords": [47.8833, 56.6333],
+    "rss": "https://marimedia.ru/rss/"
+  },
+  {
+    "region": "Республика Мордовия",
+    "city": "Саранск",
+    "coords": [45.1833, 54.1833],
+    "html": "https://mordovmedia.ru/"
+  },
+  {
+    "region": "Республика Саха (Якутия)",
+    "city": "Якутск",
+    "coords": [129.7333, 62.0333],
+    "rss": "https://yakutia.info/rss/"
+  },
+  {
+    "region": "Республика Северная Осетия",
+    "city": "Владикавказ",
+    "coords": [44.6833, 43.0333],
+    "html": "https://iratta.ru/"
+  },
+  {
+    "region": "Республика Татарстан",
+    "city": "Казань",
+    "coords": [49.1221, 55.8304],
+    "rss": "https://kazanfirst.ru/rss"
+  },
+  {
+    "region": "Республика Тыва",
+    "city": "Кызыл",
+    "coords": [94.4333, 51.7167],
+    "html": "https://tuvaonline.ru/"
+  },
+  {
+    "region": "Удмуртская Республика",
+    "city": "Ижевск",
+    "coords": [53.2015, 56.8498],
+    "rss": "https://izhevskinfo.ru/rss/"
+  },
+  {
+    "region": "Республика Хакасия",
+    "city": "Абакан",
+    "coords": [91.4333, 53.7167],
+    "html": "https://19rus.ru/"
+  },
+  {
+    "region": "Чеченская Республика",
+    "city": "Грозный",
+    "coords": [45.6833, 43.3167],
+    "html": "https://chechnya.today/"
+  },
+  {
+    "region": "Чувашская Республика",
+    "city": "Чебоксары",
+    "coords": [47.2500, 56.1333],
+    "html": "https://chuvashia.com/"
+  },
+  {
+    "region": "Алтайский край",
+    "city": "Барнаул",
+    "coords": [83.7578, 53.3547],
+    "rss": "https://altapress.ru/rss/"
+  },
+  {
+    "region": "Забайкальский край",
+    "city": "Чита",
+    "coords": [113.4998, 52.0319],
+    "html": "https://zabinfo.ru/"
+  },
+  {
+    "region": "Камчатский край",
+    "city": "Петропавловск-Камчатский",
+    "coords": [158.6500, 53.0167],
+    "rss": "https://kam24.ru/rss/"
+  },
+  {
+    "region": "Краснодарский край",
+    "city": "Краснодар",
+    "coords": [38.9753, 45.0393],
+    "rss": "https://yuga.ru/rss/news/"
+  },
+  {
+    "region": "Красноярский край",
+    "city": "Красноярск",
+    "coords": [92.8734, 56.0184],
+    "html": "https://www.newslab.ru/krasnoyarsk"
+  },
+  {
+    "region": "Пермский край",
+    "city": "Пермь",
+    "coords": [56.2397, 58.0105],
+    "rss": "https://perm.aif.ru/rss/news"
+  },
+  {
+    "region": "Приморский край",
+    "city": "Владивосток",
+    "coords": [131.8855, 43.1056],
+    "rss": "https://primamedia.ru/rss/"
+  },
+  {
+    "region": "Ставропольский край",
+    "city": "Ставрополь",
+    "coords": [41.9733, 45.0428],
+    "rss": "https://stavropolye.tv/rss/"
+  },
+  {
+    "region": "Хабаровский край",
+    "city": "Хабаровск",
+    "coords": [135.0667, 48.4833],
+    "rss": "https://khabar.khabarovsk.ru/rss/"
+  },
+  {
+    "region": "Амурская область",
+    "city": "Благовещенск",
+    "coords": [127.5333, 50.2833],
+    "html": "https://amur.info/"
+  },
+  {
+    "region": "Архангельская область",
+    "city": "Архангельск",
+    "coords": [40.5434, 64.5397],
+    "rss": "https://dvinatoday.ru/export/rss2/index.xml"
+  },
+  {
+    "region": "Астраханская область",
+    "city": "Астрахань",
+    "coords": [48.0500, 46.3500],
+    "html": "https://astrakhan.mk.ru/"
+  },
+  {
+    "region": "Белгородская область",
+    "city": "Белгород",
+    "coords": [38.8833, 50.5833],
+    "rss": "https://bel.ru/rss/"
+  },
+  {
+    "region": "Брянская область",
+    "city": "Брянск",
+    "coords": [34.3701, 52.4334],
+    "rss": "https://bryansk-news.net/rss/"
+  },
+  {
+    "region": "Владимирская область",
+    "city": "Владимир",
+    "coords": [40.4034, 56.1295],
+    "html": "https://vladimirnews.ru/"
+  },
+  {
+    "region": "Волгоградская область",
+    "city": "Волгоград",
+    "coords": [44.5167, 48.7080],
+    "rss": "https://v1.ru/rss"
+  },
+  {
+    "region": "Вологодская область",
+    "city": "Вологда",
+    "coords": [39.8915, 59.2231],
+    "html": "https://vologdaregion.ru/"
+  },
+  {
+    "region": "Воронежская область",
+    "city": "Воронеж",
+    "coords": [39.1985, 51.6720],
+    "rss": "https://riavrn.ru/rss/"
+  },
+  {
+    "region": "Ивановская область",
+    "city": "Иваново",
+    "coords": [40.9854, 56.9991],
+    "rss": "https://ivanovo-news.ru/rss/"
+  },
+  {
+    "region": "Иркутская область",
+    "city": "Иркутск",
+    "coords": [104.2833, 52.2833],
+    "rss": "https://irkutskmedia.ru/rss/"
+  },
+  {
+    "region": "Калининградская область",
+    "city": "Калининград",
+    "coords": [20.5103, 54.7104],
+    "rss": "https://kgd.ru/rss/news/"
+  },
+  {
+    "region": "Калужская область",
+    "city": "Калуга",
+    "coords": [36.2667, 54.5293],
+    "html": "https://kaluga.mk.ru/"
+  },
+  {
+    "region": "Кемеровская область",
+    "city": "Кемерово",
+    "coords": [86.7431, 55.3431],
+    "rss": "https://keminfo.ru/rss/"
+  },
+  {
+    "region": "Кировская область",
+    "city": "Киров",
+    "coords": [49.6633, 58.6035],
+    "rss": "https://kirovreg.ru/rss/"
+  },
+  {
+    "region": "Костромская область",
+    "city": "Кострома",
+    "coords": [40.9268, 57.7673],
+    "html": "https://kostroma.media/"
+  },
+  {
+    "region": "Курганская область",
+    "city": "Курган",
+    "coords": [65.3333, 55.4500],
+    "html": "https://kurganmedia.ru/"
+  },
+  {
+    "region": "Курская область",
+    "city": "Курск",
+    "coords": [36.1930, 51.7308],
+    "rss": "https://kurskmedia.ru/rss/"
+  },
+  {
+    "region": "Липецкая область",
+    "city": "Липецк",
+    "coords": [39.6000, 52.6031],
+    "html": "https://lipetskmedia.ru/"
+  },
+  {
+    "region": "Магаданская область",
+    "city": "Магадан",
+    "coords": [150.8000, 59.5500],
+    "html": "https://49.ru/magadan/"
+  },
+  {
+    "region": "Мурманская область",
+    "city": "Мурманск",
+    "coords": [33.0750, 68.9785],
+    "html": "https://vm.ru/"
+  },
+  {
+    "region": "Нижегородская область",
+    "city": "Нижний Новгород",
+    "coords": [44.0018, 56.3287],
+    "rss": "https://vremyan.ru/rss/"
+  },
+  {
+    "region": "Новгородская область",
+    "city": "Великий Новгород",
+    "coords": [31.2667, 58.5208],
+    "html": "https://novgorod.ru/"
+  },
+  {
+    "region": "Новосибирская область",
+    "city": "Новосибирск",
+    "coords": [82.9346, 55.0084],
+    "rss": "https://nscn.ru/rss"
+  },
+  {
+    "region": "Омская область",
+    "city": "Омск",
+    "coords": [73.3682, 54.9887],
+    "rss": "https://omskinform.ru/rss/"
+  },
+  {
+    "region": "Оренбургская область",
+    "city": "Оренбург",
+    "coords": [55.1000, 51.7667],
+    "html": "https://orenburgmedia.ru/"
+  },
+  {
+    "region": "Орловская область",
+    "city": "Орёл",
+    "coords": [36.0711, 52.9657],
+    "html": "https://orel-region.ru/"
+  },
+  {
+    "region": "Пензенская область",
+    "city": "Пенза",
+    "coords": [45.0000, 53.1950],
+    "html": "https://penzainform.ru/"
+  },
+  {
+    "region": "Псковская область",
+    "city": "Псков",
+    "coords": [28.3333, 57.8167],
+    "rss": "https://pskov.ru/rss/"
+  },
+  {
+    "region": "Ростовская область",
+    "city": "Ростов-на-Дону",
+    "coords": [39.7231, 47.2357],
+    "rss": "https://rostov161.ru/rss"
+  },
+  {
+    "region": "Рязанская область",
+    "city": "Рязань",
+    "coords": [39.7833, 54.6269],
+    "rss": "https://rg.ru/rss/"
+  },
+  {
+    "region": "Самарская область",
+    "city": "Самара",
+    "coords": [50.1001, 53.2001],
+    "html": "https://63.ru/"
+  },
+  {
+    "region": "Саратовская область",
+    "city": "Саратов",
+    "coords": [46.0364, 51.5406],
+    "rss": "https://sarnovosti.ru/rss/"
+  },
+  {
+    "region": "Сахалинская область",
+    "city": "Южно-Сахалинск",
+    "coords": [142.7333, 46.9500],
+    "html": "https://sakhalin.info/"
+  },
+  {
+    "region": "Свердловская область",
+    "city": "Екатеринбург",
+    "coords": [60.6122, 56.8389],
+    "rss": "https://www.ug.ru/rss"
+  },
+  {
+    "region": "Смоленская область",
+    "city": "Смоленск",
+    "coords": [32.0443, 54.7818],
+    "rss": "https://smolensk-i.ru/rss/"
+  },
+  {
+    "region": "Тамбовская область",
+    "city": "Тамбов",
+    "coords": [41.4431, 52.7233],
+    "rss": "https://tambov.gov.ru/press/news/rss/"
+  },
+  {
+    "region": "Тверская область",
+    "city": "Тверь",
+    "coords": [35.9006, 56.8587],
+    "rss": "https://tverigrad.ru/rss/"
+  },
+  {
+    "region": "Томская область",
+    "city": "Томск",
+    "coords": [84.9500, 56.4977],
+    "rss": "https://tomsk.ru/rss/"
+  },
+  {
+    "region": "Тульская область",
+    "city": "Тула",
+    "coords": [37.6156, 54.1961],
+    "html": "https://tula.mk.ru/"
+  },
+  {
+    "region": "Тюменская область",
+    "city": "Тюмень",
+    "coords": [65.5302, 57.1530],
+    "rss": "https://tyumenpravda.ru/rss/"
+  },
+  {
+    "region": "Ульяновская область",
+    "city": "Ульяновск",
+    "coords": [48.3930, 54.3280],
+    "rss": "https://ulpravda.ru/rss/"
+  },
+  {
+    "region": "Ханты-Мансийский АО",
+    "city": "Ханты-Мансийск",
+    "coords": [69.0000, 61.0000],
+    "html": "https://ugra-news.ru/"
+  },
+  {
+    "region": "Челябинская область",
+    "city": "Челябинск",
+    "coords": [61.4478, 55.1644],
+    "rss": "https://www.chel.ru/rss"
+  },
+  {
+    "region": "Чукотский АО",
+    "city": "Анадырь",
+    "coords": [177.5000, 64.7333],
+    "html": "https://chukotka.org/"
+  },
+  {
+    "region": "Ямало-Ненецкий АО",
+    "city": "Салехард",
+    "coords": [66.5333, 66.5333],
+    "html": "https://ugra-news.ru/"
+  },
+  {
+    "region": "Еврейская АО",
+    "city": "Биробиджан",
+    "coords": [132.9333, 48.7833],
+    "html": "https://eao.ru/"
+  },
+  {
+    "region": "Ненецкий АО",
+    "city": "Нарьян-Мар",
+    "coords": [53.0000, 67.6333],
+    "html": "https://adm-nao.ru/"
+  },
+  {
+    "region": "Донецкая Народная Республика",
+    "city": "Донецк",
+    "coords": [37.8031, 48.0159],
+    "rss": "https://dni.ru/rss/"
+  },
+  {
+    "region": "Луганская Народная Республика",
+    "city": "Луганск",
+    "coords": [39.3056, 48.5736],
+    "html": "https://lug-info.com/"
+  },
+  {
+    "region": "Запорожская область",
+    "city": "Мелитополь",
+    "coords": [35.3667, 46.8500],
+    "html": "https://melitopol.today/"
+  },
+  {
+    "region": "Херсонская область",
+    "city": "Херсон",
+    "coords": [32.6167, 46.6333],
+    "html": "https://kherson.media/"
+  }
+]
